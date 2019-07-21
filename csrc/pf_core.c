@@ -39,18 +39,18 @@
 ** Global Data
 ***************************************************************/
 
-char          gScratch[TIB_SIZE];
+char            gScratch[TIB_SIZE];
 pfTaskData_t   *gCurrentTask = NULL;
 pfDictionary_t *gCurrentDictionary;
-cell_t         gNumPrimitives;
+cell_t          gNumPrimitives;
 
-ExecToken     gLocalCompiler_XT;   /* custom compiler for local variables */
-ExecToken     gNumberQ_XT;         /* XT of NUMBER? */
-ExecToken     gQuitP_XT;           /* XT of (QUIT) */
-ExecToken     gAcceptP_XT;         /* XT of ACCEPT */
+ExecToken       gLocalCompiler_XT;   /* custom compiler for local variables */
+ExecToken       gNumberQ_XT;         /* XT of NUMBER? */
+ExecToken       gQuitP_XT;           /* XT of (QUIT) */
+ExecToken       gAcceptP_XT;         /* XT of ACCEPT */
 
 /* Depth of data stack when colon called. */
-cell_t         gDepthAtColon;
+cell_t          gDepthAtColon;
 
 /* Global Forth variables. */
 cell_t          gVarContext;      /* Points to last name field. */
@@ -64,18 +64,23 @@ cell_t          gVarQuiet;        /* Suppress unnecessary messages, OK, etc. */
 cell_t          gVarReturnCode;   /* Returned to caller of Forth, eg. UNIX shell. */
 
 /* data for INCLUDE that allows multiple nested files. */
-IncludeFrame  gIncludeStack[MAX_INCLUDE_DEPTH];
-cell_t         gIncludeIndex;
+IncludeFrame    gIncludeStack[MAX_INCLUDE_DEPTH];
+cell_t          gIncludeIndex;
 
 static void pfResetForthTask( void );
 static void pfInit( void );
 static void pfTerm( void );
 
-/* TODO move to pf_config.h header. */
 #define DEFAULT_RETURN_DEPTH (512)
 #define DEFAULT_USER_DEPTH (512)
-#define DEFAULT_HEADER_SIZE (120000)
-#define DEFAULT_CODE_SIZE (300000)
+
+#ifndef PF_DEFAULT_HEADER_SIZE
+#define PF_DEFAULT_HEADER_SIZE (120000)
+#endif
+
+#ifndef PF_DEFAULT_CODE_SIZE
+#define PF_DEFAULT_CODE_SIZE (300000)
+#endif
 
 /* Initialize globals in a function to simplify loading on
  * embedded systems which may not support initialization of data section.
@@ -486,7 +491,7 @@ ThrowCode pfDoForth( const char *DicFileName, const char *SourceName, cell_t IfI
         if( IfInit )
         {
             pfDebugMessage("Build dictionary from scratch.\n");
-            dic = pfBuildDictionary( DEFAULT_HEADER_SIZE, DEFAULT_CODE_SIZE );
+            dic = pfBuildDictionary( PF_DEFAULT_HEADER_SIZE, PF_DEFAULT_CODE_SIZE );
         }
         else
 #else

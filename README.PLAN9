@@ -1,11 +1,3 @@
 cd build/plan9
 mk install
 pforth
-
-# This version of hugs2006 is only for Plan 9
-# It was created by taking a set of installed Debian hugs libs
-# and substituting them for the original source distribution
-# and hacking around on the HUGSPATH in the options.h to make things load
-# the makefile options config files are based on andrey's hugs.tgz on sources
-# the HUGSPATH in options.h may need to be changed to make some libraries work
-# lightly tested -mycroftiv

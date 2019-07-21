@@ -1,0 +1,4 @@
+cd build/plan9
+mk install
+cd ../../fth
+pforth

@@ -22,10 +22,11 @@ OFILES=\
 	pfcustom.$O\
 	pf_fileio_stdio.$O\
 	pf_io_stdio.$O\
+	getfcr.$O\
 
 </sys/src/cmd/mkone
 
-CFLAGS=-c -D_POSIX_SOURCE -D_BSD_EXTENSION -DUNIX
+CFLAGS=-c -D_POSIX_SOURCE -D_BSD_EXTENSION -DUNIX -DPF_SUPPORT_FP
 
 FTH=../../fth
 CSRC=../../csrc
@@ -37,6 +38,9 @@ pf_fileio_stdio.$O: $CSRC/stdio/pf_fileio_stdio.c
 
 pf_io_stdio.$O: $CSRC/stdio/pf_io_stdio.c
 	$CC $CFLAGS $CSRC/stdio/pf_io_stdio.c $EMBCCOPTS
+
+getfcr.$O: $CSRC/$objtype/getfcr.s
+	$O^a $CSRC/$objtype/getfcr.s
 
 %.$O: $CSRC/%.c
 	$CC $CFLAGS $CSRC/$stem.c -o $stem.$O $EMBCCOPTS

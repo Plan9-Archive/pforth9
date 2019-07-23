@@ -38,6 +38,12 @@ typedef cell_t ThrowCode;
 extern "C" {
 #endif
 
+#ifdef PF_SUPPORT_FP
+double floor(double x);
+double round(double x);
+void setfcr(unsigned long fcr);
+#endif
+
 /* Main entry point to pForth. */
 ThrowCode pfDoForth( const char *DicName, const char *SourceName, cell_t IfInit );
 

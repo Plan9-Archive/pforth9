@@ -45,6 +45,8 @@
     #include "pf_inc1.h"
 #endif
 
+#include "_OPTIONS.h"
+
 #include "pforth.h"
 #include "pf_types.h"
 #include "pf_io.h"
